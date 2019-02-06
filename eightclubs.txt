@@ -1,0 +1,5 @@
+SELECT b.title, b.year 
+FROM yrb_book b, yrb_offer o
+WHERE b.title=o.title and b.year = o.year 
+GROUP BY b.title, b.year 
+HAVING count(*)=8;

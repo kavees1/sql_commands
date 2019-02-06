@@ -1,0 +1,13 @@
+SELECT   distinct j.name, i.cat as category , i.language  
+
+FROM (select language ,cat, count(title) as count 
+        from yrb_book
+        group by language, cat) i,
+        (select cid, name, language,cat,count(title) as count 
+        from
+        (select distinct p.cid, c.name,p.title,p.year,b.language,b.cat
+        from yrb_purchase p, yrb_customer c, yrb_book b 
+        where p.cid = c.cid and  p.year = b.year and p.title = b.title )
+        group by cid,name,language,cat ) j
+WHERE  i.cat = j.cat and i.count = j.count and i.language = j.language and i.count > 1
+    ORDER BY j.name, i.cat,i.language;

@@ -1,0 +1,4 @@
+select   yrb_customer.name ,date(yrb_purchase.when) as DATE 
+from yrb_customer, yrb_purchase
+where yrb_customer.cid = yrb_purchase.cid AND  yrb_purchase.when < '1/1/1998';
+ 

@@ -1,0 +1,4 @@
+SELECT distinct c.name as NAMEA,  c1.name as NAMEB
+FROM yrb_customer c, yrb_purchase p , yrb_customer c1, yrb_purchase p1
+WHERE p.cid =c.cid and p1.cid =c1.cid and  p.title = p1.title and p.year= p1.year 
+  and c.cid > c1.cid ;

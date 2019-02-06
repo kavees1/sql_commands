@@ -1,0 +1,9 @@
+SELECT i.name as NAME, i.cat as CAT , i.price as COST 
+FROM  (select c.name ,c.cid , b.cat , sum(o.price) PRICE 
+	   from yrb_customer c, yrb_book b, yrb_offer o, yrb_purchase p 
+	   where c.cid = p.cid  and b.title=o.title and b.year = o.year and o.title=p.title and o.year = p.year and o.club = p.club 
+	   group by c.name , c.cid, b.cat) AS i 
+WHERE i.price >= ALL (select sum(o1.price) price 
+					  from yrb_customer c1, yrb_book b1, yrb_offer o1, yrb_purchase p1 
+					  where c1.cid=i.cid and  c1.cid = p1.cid  and b1.title=o1.title and b1.year = o1.year and  o1.title=p1.title and o1.year = p1.year  and o1.club = p1.club 
+					  group by c1.name , b1.cat);

@@ -1,0 +1,5 @@
+SELECT i.title,i.year 
+FROM (select cid , title,year,sum(qnty)as bookcount 
+    from yrb_purchase 
+    group by cid, title, year) as I 
+WHERE bookCount=2;

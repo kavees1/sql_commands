@@ -1,0 +1,7 @@
+SELECT o.title, o.year , o.price 
+ FROM yrb_offer o 
+ WHERE o.price > ALL (select avg(temp.price) 
+					   from (select max(price) price 
+							 from yrb_book b, yrb_offer o1 
+							 where b.LANGUAGE='English' and b.title=o1.title and b.year = o1.year  
+							 group by o1.club ) as temp);
